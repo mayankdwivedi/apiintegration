@@ -4,8 +4,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder
 
 class SecUserSecRole implements Serializable {
 
-	private static final long serialVersionUID = 1
-
 	SecUser secUser
 	SecRole secRole
 
@@ -15,7 +13,7 @@ class SecUserSecRole implements Serializable {
 		}
 
 		other.secUser?.id == secUser?.id &&
-		other.secRole?.id == secRole?.id
+			other.secRole?.id == secRole?.id
 	}
 
 	int hashCode() {
@@ -26,69 +24,30 @@ class SecUserSecRole implements Serializable {
 	}
 
 	static SecUserSecRole get(long secUserId, long secRoleId) {
-		SecUserSecRole.where {
-			secUser == SecUser.load(secUserId) &&
-			secRole == SecRole.load(secRoleId)
-		}.get()
-	}
-
-	static boolean exists(long secUserId, long secRoleId) {
-		SecUserSecRole.where {
-			secUser == SecUser.load(secUserId) &&
-			secRole == SecRole.load(secRoleId)
-		}.count() > 0
+		find 'from SecUserSecRole where secUser.id=:secUserId and secRole.id=:secRoleId',
+			[secUserId: secUserId, secRoleId: secRoleId]
 	}
 
 	static SecUserSecRole create(SecUser secUser, SecRole secRole, boolean flush = false) {
-		def instance = new SecUserSecRole(secUser: secUser, secRole: secRole)
-		instance.save(flush: flush, insert: true)
-		instance
+		new SecUserSecRole(secUser: secUser, secRole: secRole).save(flush: flush, insert: true)
 	}
 
-	static boolean remove(SecUser u, SecRole r, boolean flush = false) {
-		if (u == null || r == null) return false
-
-		int rowCount = SecUserSecRole.where {
-			secUser == SecUser.load(u.id) &&
-			secRole == SecRole.load(r.id)
-		}.deleteAll()
-
-		if (flush) { SecUserSecRole.withSession { it.flush() } }
-
-		rowCount > 0
-	}
-
-	static void removeAll(SecUser u, boolean flush = false) {
-		if (u == null) return
-
-		SecUserSecRole.where {
-			secUser == SecUser.load(u.id)
-		}.deleteAll()
-
-		if (flush) { SecUserSecRole.withSession { it.flush() } }
-	}
-
-	static void removeAll(SecRole r, boolean flush = false) {
-		if (r == null) return
-
-		SecUserSecRole.where {
-			secRole == SecRole.load(r.id)
-		}.deleteAll()
-
-		if (flush) { SecUserSecRole.withSession { it.flush() } }
-	}
-
-	static constraints = {
-		secRole validator: { SecRole r, SecUserSecRole ur ->
-			if (ur.secUser == null) return
-			boolean existing = false
-			SecUserSecRole.withNewSession {
-				existing = SecUserSecRole.exists(ur.secUser.id, r.id)
-			}
-			if (existing) {
-				return 'userRole.exists'
-			}
+	static boolean remove(SecUser secUser, SecRole secRole, boolean flush = false) {
+		SecUserSecRole instance = SecUserSecRole.findBySecUserAndSecRole(secUser, secRole)
+		if (!instance) {
+			return false
 		}
+
+		instance.delete(flush: flush)
+		true
+	}
+
+	static void removeAll(SecUser secUser) {
+		executeUpdate 'DELETE FROM SecUserSecRole WHERE secUser=:secUser', [secUser: secUser]
+	}
+
+	static void removeAll(SecRole secRole) {
+		executeUpdate 'DELETE FROM SecUserSecRole WHERE secRole=:secRole', [secRole: secRole]
 	}
 
 	static mapping = {

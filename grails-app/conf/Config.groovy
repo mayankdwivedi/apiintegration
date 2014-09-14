@@ -152,3 +152,13 @@ grails {
                  "mail.smtp.socketFactory.fallback":"false"]
     }
 }
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'org.example.SecUser'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'org.example.SecUserSecRole'
+grails.plugins.springsecurity.authority.className = 'org.example.SecRole'
+
+
+grails.plugins.springsecurity.securityConfigType = 'InterceptUrlMap'
+grails.plugins.springsecurity.interceptUrlMap = [
+        '/facebook/fMessage': ['IS_AUTHENTICATED_FULLY']
+]

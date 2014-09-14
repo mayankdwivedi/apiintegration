@@ -3,12 +3,15 @@ package apiintegrationtest
 import com.sun.xml.internal.ws.encoding.HeaderTokenizer
 import grails.converters.JSON
 import org.codehaus.groovy.classgen.Verifier
+import org.example.SecUser
 
 class FacebookController {
 
      String appId='292305014282618'
     String appSecret='a1f526e954c040d5a0ca9e7565602da9'
     String accessToken
+
+    def springSecurityService
 
     def mailService
 
@@ -71,9 +74,25 @@ class FacebookController {
             socialProfile.accessToken = accessToken
             socialProfile.user = User.findByUsername(User.findById(userFB).username)*/
 
-        println("########################Profile Data is#################################"+profileData)
+        println("########################Profile Data is#################################"+profileData.firstN)
+        /*[id:770713062966998, first_name:Mayank, email:mayanksep19@gmail.com, last_name:Dwivedi*/
 
-            redirect(controller: 'job', action: 'newAccessTokenPostMessageFB', params: [accessTokenNew: accessToken])
+        SecUser user = SecUser.findByUsername(profileData.email)
+        if (user) {
+            // If user found with this facebook id, authenticate him
+            springSecurityService.reauthenticate(profileData.email)
+
+            println('*************************User found in database**********************')
+        } else {
+            SecUser secUser=new SecUser();
+            secUser.setUsername(profileData.email)
+            secUser.setPassword(profileData.id)
+            secUser.save flush:true
+            println('*************************User not found in database**********************')
+            springSecurityService.reauthenticate(profileData.email)
+
+        }
+            redirect(controller: 'facebook', action: 'fMessage')
 
     }
 
@@ -87,5 +106,10 @@ class FacebookController {
         }
 
         println('***************************** Mail Send*******************************')
+    }
+
+    def fMessage(){
+
+      render view: 'fMessage.gsp'
     }
 }

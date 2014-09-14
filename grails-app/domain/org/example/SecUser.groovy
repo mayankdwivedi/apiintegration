@@ -6,12 +6,10 @@ class SecUser {
 
 	String username
 	String password
-	boolean enabled = true
+	boolean enabled
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-
-	static transients = ['springSecurityService']
 
 	static constraints = {
 		username blank: false, unique: true
@@ -23,7 +21,7 @@ class SecUser {
 	}
 
 	Set<SecRole> getAuthorities() {
-		SecUserSecRole.findAllBySecUser(this).collect { it.secRole }
+		SecUserSecRole.findAllBySecUser(this).collect { it.secRole } as Set
 	}
 
 	def beforeInsert() {
@@ -37,6 +35,6 @@ class SecUser {
 	}
 
 	protected void encodePassword() {
-		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+		password = springSecurityService.encodePassword(password)
 	}
 }

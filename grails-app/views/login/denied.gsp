@@ -1,19 +1,10 @@
-<html>
 <head>
-    <title> FrontunnrApp </title>
-    <meta name="layout" content="main">
+<meta name='layout' content='main' />
+<title><g:message code="springSecurity.denied.title" /></title>
 </head>
+
 <body>
-<div id="titlebar">
-	<div class="container_12 clearfix">
-	<h1>Sign In</h1>
-	<div class="clear"></div>
-	</div>
-</div>
-<div id="content" class="container_12">
-
-Login Denied
-
+<div class='body'>
+	<div class='errors'><g:message code="springSecurity.denied.message" /></div>
 </div>
 </body>
-</html>  

@@ -1,59 +1,126 @@
 <html>
 <head>
-    <title> FrontRunnerApp </title>
-    <meta name="layout" content="main">
+	<meta name='layout' content='main'/>
+	<title><g:message code="springSecurity.login.title"/></title>
+	<style type='text/css' media='screen'>
+	#login {
+		margin: 15px 0px;
+		padding: 0px;
+		text-align: center;
+	}
+
+	#login .inner {
+		width: 340px;
+		padding-bottom: 6px;
+		margin: 60px auto;
+		text-align: left;
+		border: 1px solid #aab;
+		background-color: #f0f0fa;
+		-moz-box-shadow: 2px 2px 2px #eee;
+		-webkit-box-shadow: 2px 2px 2px #eee;
+		-khtml-box-shadow: 2px 2px 2px #eee;
+		box-shadow: 2px 2px 2px #eee;
+	}
+
+	#login .inner .fheader {
+		padding: 18px 26px 14px 26px;
+		background-color: #f7f7ff;
+		margin: 0px 0 14px 0;
+		color: #2e3741;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	#login .inner .cssform p {
+		clear: left;
+		margin: 0;
+		padding: 4px 0 3px 0;
+		padding-left: 105px;
+		margin-bottom: 20px;
+		height: 1%;
+	}
+
+	#login .inner .cssform input[type='text'] {
+		width: 120px;
+	}
+
+	#login .inner .cssform label {
+		font-weight: bold;
+		float: left;
+		text-align: right;
+		margin-left: -105px;
+		width: 110px;
+		padding-top: 3px;
+		padding-right: 10px;
+	}
+
+	#login #remember_me_holder {
+		padding-left: 120px;
+	}
+
+	#login #submit {
+		margin-left: 15px;
+	}
+
+	#login #remember_me_holder label {
+		float: none;
+		margin-left: 0;
+		text-align: left;
+		width: 200px
+	}
+
+	#login .inner .login_message {
+		padding: 6px 25px 20px 25px;
+		color: #c33;
+	}
+
+	#login .inner .text_ {
+		width: 120px;
+	}
+
+	#login .inner .chk {
+		height: 12px;
+	}
+	</style>
 </head>
+
 <body>
+<div id='login'>
+	<div class='inner'>
+		<div class='fheader'><g:message code="springSecurity.login.header"/></div>
 
-<div class="content">
-  <div class="row">
-    <form action='${postUrl}' method='POST' id="loginForm" name="loginForm">
-      <div class="span6 offset3">
-        <div class="well">
-            <g:if test="${flash.message}">
+		<g:if test='${flash.message}'>
+			<div class='login_message'>${flash.message}</div>
+		</g:if>
 
-                        <h2>${flash.message}</h2>
+		<form action='${postUrl}' method='POST' id='loginForm' class='cssform' autocomplete='off'>
+			<p>
+				<label for='username'><g:message code="springSecurity.login.username.label"/>:</label>
+				<input type='text' class='text_' name='j_username' id='username'/>
+			</p>
 
-            </g:if>
+			<p>
+				<label for='password'><g:message code="springSecurity.login.password.label"/>:</label>
+				<input type='password' class='text_' name='j_password' id='password'/>
+			</p>
 
-          <h3 class="lead">Log In</h3>
-          <div class="divider"></div>
-          <br />
-          <input type="text" class="span5" placeholder="Email / Username " name="j_username" id="j_username" value="${session['SPRING_SECURITY_LAST_USERNAME']}" />
+			<p id="remember_me_holder">
+				<input type='checkbox' class='chk' name='${rememberMeParameter}' id='remember_me' <g:if test='${hasCookie}'>checked='checked'</g:if>/>
+				<label for='remember_me'><g:message code="springSecurity.login.remember.me.label"/></label>
+			</p>
 
-          <label for="password"></label>
-          <input type="password" placeholder="Password" class="span5" name="j_password" id="j_password" />
-          <br>
-          <input type="checkbox" class="checkbox" name="${rememberMeParameter}" id="remember_me" checked="checked" />
-          <g:message code='spring.security.ui.login.rememberme'/> &nbsp;|&nbsp;
-          <g:link controller="user" action="resetPassword" >Forgot your password?</g:link>
-          <br>
-          <br>
-          <input class="btn btn-success" id="user_submit" name="commit" type="submit" value="Log in" />
-        </div>
-
-        <div class="well">
-          <p>
-            <br>
-            <g:link controller="employer" action="register" >Sign up</g:link><br>
-            <g:link controller="user" action="resetPassword" >Forgot your password?</g:link><br />
-            <a href="/confirmation/new">Didn't receive confirmation instructions?</a><br />
-            <a href="/auth/linked_in">Sign in with LinkedIn</a>
-          </p>
-        </div>
-
-          <div class="well">
-          <p>
-            <br>
-            <g:link controller="employer" action="register" >Register as Employer</g:link><br>
-          </p>
-        </div>
-      </div>
-
-
-    </form>
-  </div>
+			<p>
+				<input type='submit' id="submit" value='${message(code: "springSecurity.login.button")}'/>
+			</p>
+		</form>
+	</div>
 </div>
-
+<script type='text/javascript'>
+	<!--
+	(function() {
+		document.forms['loginForm'].elements['j_username'].focus();
+	})();
+	// -->
+</script>
 </body>
-</html>  
+</html>
