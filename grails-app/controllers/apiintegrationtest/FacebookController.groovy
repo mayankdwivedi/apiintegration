@@ -96,17 +96,7 @@ class FacebookController {
 
     }
 
-    def sendMyMail(){
 
-        mailService.sendMail {
-            async true
-            to 'rkriteshkumar.23@gmail.com','mayanksep19@gmail.com'
-            subject 'Grails Mail'
-            body 'This is grails mail in your inbox.'
-        }
-
-        println('***************************** Mail Send*******************************')
-    }
 
     def fMessage(){
 
