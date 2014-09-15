@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Test Mail</title>
+    <title>API Integration</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="${resource(dir: 'css', file: 'bootstrap.min.css')}" rel="stylesheet">
@@ -32,24 +32,24 @@
 
 <body>
 
-
+<br><br><br>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2">
-            <div class="modal-body">
-                <h2>Asynchronous Mail API</h2><g:link controller="API" action="index" class="btn">Home</g:link>
+
+                <h2>Contact Us</h2><g:link controller="API" action="index" class="btn">Home</g:link>
                 <hr class="star-primary">
-                <img src="${resource(dir: 'images/portfolio', file: 'sendMail.png')}" class="img-responsive img-centered" alt="">
+                %{--<img src="${resource(dir: 'images/portfolio', file: 'sendMail.png')}" class="img-responsive img-centered" alt="">
                 <br>
                 <p>
                     The Mail API that is used here is asynchronous in nature that means user will not have to wait to get the site active after the mail is send.
-                </p>
+                </p>--}%
 
                 <g:if test='${flash.message}'>
                     <div class='text-warning'>${flash.message}</div>
                 </g:if>
 
-                <g:form controller="mail" action="sendMyMail">
+                <g:form controller="mail" action="contactUsMail">
 
                     <g:textField name="mailId" style=" height:40px;" class='col-lg-12' placeholder="Email"/><br><br>
                     <g:hiddenField name="tomailId" value="mayrittech@gmail.com"/>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-</div>
+<
 <br>
 <br>
 </body>

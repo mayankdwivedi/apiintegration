@@ -16,48 +16,92 @@ class MailController {
 
     def sendMyMail(){
 
+
+
+        String tomailId=params.tomailId
+
+        String message = params.message
+
+        String mailSubject=params.subject
+
+        String errorMessage=''
+
+
+        if(!tomailId.contains('@')|| tomailId.size()==0){
+            errorMessage=errorMessage+'Provide correct mail Id. '
+        }
+
+        if(mailSubject.size()==0){
+            errorMessage=errorMessage+' Mail subject cannot be empty. '
+        }
+
+        if(message.size()==0){
+            errorMessage=errorMessage+' Message cannot be empty. '
+        }
+
+        if(!errorMessage.equals('')){
+            flash.message=errorMessage
+            redirect(controller: 'mail',action: 'mailPage')
+        }
+        else {
+
+            mailService.sendMail {
+                async true
+                to tomailId
+                subject mailSubject
+                body message
+            }
+
+            println('***************************** Mail Send*******************************')
+
+            redirect(controller: 'API', action: 'index')
+        }
+
+       }
+
+    def contactUsMail(){
+
         String emailID=params.mailId
 
         String tomailId=params.tomailId
 
-        String message
+        String message = params.message
 
-        if(emailID!=null) {
-            message = params.message + '  ' + emailID
-        }else{
-            message = params.message
-        }
+        String fullMessage=message + '  ' + emailID
+
         String mailSubject=params.subject
 
+        String errorMessage=''
 
-
-        if( mailSubject.equals('')){
-            flash.message='Subject cannot be blank'
-            redirect(controller: 'mail',action: 'mailPage')
+        if(!emailID.contains('@')|| emailID.size()==0){
+           errorMessage=errorMessage+'Provide correct mail Id. '
         }
 
-        if( message.equals('')){
-            flash.message='Message cannot be blank'
-            redirect(controller: 'mail',action: 'mailPage')
+        if(mailSubject.size()==0){
+            errorMessage=errorMessage+' Mail subject cannot be empty. '
         }
 
-       if(!tomailId.contains('@')|| tomailId.equals('')){
-           flash.message='Provide correct mail Id'
-           redirect(controller: 'mail',action: 'mailPage')
-       }
+        if(message.size()==0){
+            errorMessage=errorMessage+' Message cannot be empty. '
+        }
+
+        if(!errorMessage.equals('')){
+            flash.message=errorMessage
+            redirect(controller: 'mail',action: 'contact')
+        }
         else {
 
-           mailService.sendMail {
-               async true
-               to tomailId
-               subject mailSubject
-               body message
-           }
+            mailService.sendMail {
+                async true
+                to tomailId
+                subject mailSubject
+                body fullMessage
+            }
 
-           println('***************************** Mail Send*******************************')
+            println('***************************** Mail Send*******************************')
 
-           redirect(controller: 'API', action: 'index')
-       }
+            redirect(controller: 'API', action: 'index')
+        }
 
-       }
+    }
 }

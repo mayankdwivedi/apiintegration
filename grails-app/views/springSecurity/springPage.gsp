@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Test Mail</title>
+    <title>API Integration</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
     <link href="${resource(dir: 'css', file: 'bootstrap.min.css')}" rel="stylesheet">
