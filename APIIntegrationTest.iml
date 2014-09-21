@@ -32,6 +32,7 @@
       <sourceFolder url="file://$MODULE_DIR$/test/unit" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/test/integration" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
+      <excludeFolder url="file://$MODULE_DIR$/target/work/gspcompile" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-build-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/work/plugin-provided-classes" />
@@ -77,6 +78,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.1/javax.mail-1.5.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.0.7.RELEASE/spring-security-web-3.0.7.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.0.7.RELEASE/spring-security-core-3.0.7.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-async/4.0.2/twitter4j-async-4.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-stream/4.0.2/twitter4j-stream-4.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

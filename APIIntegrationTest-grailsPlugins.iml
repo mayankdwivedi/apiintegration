@@ -8,6 +8,7 @@
           <root url="file://$MODULE_DIR$/target/work/plugins/resources-1.2.8/web-app" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/database-migration-1.4.0/grails-app/views" relative="/" />
           <root url="file://$MODULE_DIR$/target/work/plugins/mail-1.0.7/grails-app/views" relative="/" />
+          <root url="file://$MODULE_DIR$/target/work/plugins/twitter4j-4.0.4.1/grails-app/views" relative="/" />
         </webroots>
         <sourceRoots />
       </configuration>
@@ -60,6 +61,11 @@
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.54/src/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/tomcat-7.0.54/src/groovy" isTestSource="false" />
     </content>
+    <content url="file://$MODULE_DIR$/target/work/plugins/twitter4j-4.0.4.1">
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/twitter4j-4.0.4.1/src/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/twitter4j-4.0.4.1/grails-app/i18n" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/twitter4j-4.0.4.1/grails-app/controllers" isTestSource="false" />
+    </content>
     <content url="file://$MODULE_DIR$/target/work/plugins/webxml-1.4.1">
       <sourceFolder url="file://$MODULE_DIR$/target/work/plugins/webxml-1.4.1/src/groovy" isTestSource="false" />
     </content>
@@ -100,6 +106,9 @@
           <root url="jar://$MAVEN_REPOSITORY$/com/sun/mail/javax.mail/1.5.1/javax.mail-1.5.1.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-web/3.0.7.RELEASE/spring-security-web-3.0.7.RELEASE.jar!/" />
           <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/3.0.7.RELEASE/spring-security-core-3.0.7.RELEASE.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-async/4.0.2/twitter4j-async-4.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-stream/4.0.2/twitter4j-stream-4.0.2.jar!/" />
+          <root url="jar://$MAVEN_REPOSITORY$/org/twitter4j/twitter4j-core/4.0.2/twitter4j-core-4.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

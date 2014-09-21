@@ -162,3 +162,5 @@ grails.plugins.springsecurity.securityConfigType = 'InterceptUrlMap'
 grails.plugins.springsecurity.interceptUrlMap = [
         '/facebook/fMessage': ['IS_AUTHENTICATED_FULLY']
 ]
+
+
